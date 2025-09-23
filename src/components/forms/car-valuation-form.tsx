@@ -103,25 +103,28 @@ export function CarValuationForm() {
       // Generate a short client reference
       const ref = Math.random().toString(36).slice(2, 8).toUpperCase();
       
-      // Prepare payload with normalized city
+      // Prepare payload for external webhook
       const payload = {
         name: data.name,
         city: data.city === "Other" ? data.otherCity : data.city, // normalized
+        otherCity: data.otherCity,
         phone: data.phone,
         email: data.email,
-        payout: {
-          type: data.payoutType,
-          token: data.payoutType === "crypto" ? data.token : undefined,
-          otherToken: data.payoutType === "crypto" && data.token === "Other" ? data.otherToken : undefined,
-        },
-        source: "hero_form_compact",
+        paymentMethod: data.payoutType, // 'crypto' | 'cash'
+        source: process.env.NEXT_PUBLIC_LEAD_SOURCE || "web_form",
         clientRef: ref,
+        utm: {
+          utm_source: typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get("utm_source") || "" : "",
+          utm_medium: typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get("utm_medium") || "" : "",
+          utm_campaign: typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get("utm_campaign") || "" : "",
+        },
       };
 
       console.log("Form payload:", payload);
       
-      // Submit to API endpoint
-      const response = await fetch('/api/submit-valuation', {
+      // Submit to external webhook
+      const url = process.env.NEXT_PUBLIC_LEAD_WEBHOOK || "https://carvault-webhook.vercel.app/api/lead";
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -129,18 +132,14 @@ export function CarValuationForm() {
         body: JSON.stringify(payload),
       });
 
-      const result = await response.json();
-
-      if (!result.success) {
-        throw new Error(result.error || 'Failed to submit valuation');
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Webhook submission failed:", errorText);
+        alert('Failed to submit your valuation. Please try again.');
+        return;
       }
 
-      // Log Telegram delivery status
-      if (result.telegramSent) {
-        console.log('✅ Telegram notification sent successfully');
-      } else if (result.telegramError) {
-        console.warn('⚠️ Telegram notification failed:', result.telegramError);
-      }
+      console.log('✅ Lead submitted successfully to webhook');
       
       // Success → redirect to thank-you with optional name/ref in query
       const params = new URLSearchParams({

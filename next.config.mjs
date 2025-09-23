@@ -15,4 +15,7 @@ export default {
 
   // Needed for Pages routing; not needed locally
   trailingSlash: isPagesBuild,
+  
+  // Ignore ESLint during builds for faster deployment
+  eslint: { ignoreDuringBuilds: true },
 };

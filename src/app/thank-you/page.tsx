@@ -1,16 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-export const metadata = {
-  title: "Thank You — CarVault",
-  robots: { index: false, follow: false }, // avoid indexing the final step
-};
-
-export default async function ThankYouPage({
-  searchParams,
-}: { searchParams: Promise<{ ref?: string; name?: string }> }) {
-  const params = await searchParams;
-  const ref = params?.ref;
-  const firstName = params?.name;
+function ThankYouContent() {
+  const searchParams = useSearchParams();
+  const ref = searchParams?.get('ref') || undefined;
+  const firstName = searchParams?.get('name') || undefined;
 
   return (
     <main className="mx-auto max-w-3xl px-4 lg:px-8 py-12">
@@ -59,5 +56,23 @@ export default async function ThankYouPage({
         </div>
       </div>
     </main>
+  );
+}
+
+export default function ThankYouPage() {
+  return (
+    <Suspense fallback={
+      <main className="mx-auto max-w-3xl px-4 lg:px-8 py-12">
+        <div className="rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 lg:p-10 shadow-lg">
+          <div className="animate-pulse">
+            <div className="h-8 bg-neutral-700 rounded w-1/3 mb-4"></div>
+            <div className="h-6 bg-neutral-700 rounded w-1/2 mb-4"></div>
+            <div className="h-4 bg-neutral-700 rounded w-3/4"></div>
+          </div>
+        </div>
+      </main>
+    }>
+      <ThankYouContent />
+    </Suspense>
   );
 }
