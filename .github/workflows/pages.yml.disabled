@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages (Simple)
+name: Deploy Next.js static export to GitHub Pages
 
 on:
   push:
@@ -48,6 +48,9 @@ jobs:
           path: ./out
 
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
