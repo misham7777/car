@@ -99,7 +99,7 @@ export default function WhoWeAre() {
             variants={itemVariants}
             className="mt-6 text-slate-400 max-w-2xl"
           >
-            Dubai-based, 15 years buying premium cars. We buy direct (no middleman), price at real market value, and settle same day—crypto to your wallet or cash. Paperwork handled across all emirates. We offer full online inspection so you never need to visit a branch.
+            Dubai-based, 15 years buying premium cars. We buy direct (no middleman), price at real market value, and settle same day—digital payment or cash. Paperwork handled across all emirates. We offer full online inspection so you never need to visit a branch.
           </motion.p>
 
           {/* 2×2 Stats Grid */}
@@ -129,14 +129,14 @@ export default function WhoWeAre() {
               </div>
             </div>
 
-            {/* Instant Crypto */}
+            {/* Instant Digital Payment */}
             <div className="flex items-center gap-4 rounded-2xl bg-asphalt/60 ring-1 ring-trim-silver/15 p-4 md:p-5">
               <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-asphalt to-carbon ring-1 ring-trim-silver/20 shadow-md grid place-content-center">
                 <Smile className="h-5 w-5 md:h-6 md:w-6 text-trim-silver" aria-hidden="true" />
               </div>
               <div>
-                <div className="text-base md:text-lg font-semibold text-pearl">Instant Crypto</div>
-                <div className="text-xs md:text-sm leading-tight opacity-70 text-slate-400">USDT/USDC/BTC/ETH.</div>
+                <div className="text-base md:text-lg font-semibold text-pearl">Instant Digital Payment</div>
+                <div className="text-xs md:text-sm leading-tight opacity-70 text-slate-400">Same-day payout.</div>
               </div>
             </div>
 

@@ -13,7 +13,7 @@ interface HeroDirectLuxProps {
 
 export default function HeroDirectLux({ 
   carImage = "/images/nano-banana-2025-09-22T13-30-18-1.png",
-  carImageAlt = "Luxury car showcase for sale in UAE with instant crypto payout"
+  carImageAlt = "Luxury car showcase for sale in UAE with instant digital payout"
 }: HeroDirectLuxProps) {
   // Apply basePath for GitHub Pages
   const basePath = process.env.GITHUB_PAGES === 'true' ? '/car' : '';
@@ -54,7 +54,7 @@ export default function HeroDirectLux({
     },
   };
 
-  const cryptoCoins = ["USDT", "USDC", "BTC", "ETH", "BNB", "SOL"];
+  const paymentMethods = ["Bank Transfer", "Wire Transfer", "Digital Wallet", "Same Day", "Instant", "Secure"];
 
   return (
     <section 
@@ -68,28 +68,28 @@ export default function HeroDirectLux({
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="container-wide section-spacing content-center min-h-[calc(100vh-var(--header-h))]"
+        className="container-wide py-6 sm:py-8 lg:py-12 content-center min-h-[calc(100vh-var(--header-h))]"
       >
-        {/* Mobile: Crypto Badge at Top */}
+        {/* Mobile: Digital Payment Badge at Top */}
         <motion.div 
           variants={itemVariants}
-          className="lg:hidden flex justify-center mb-6 px-4"
+          className="lg:hidden flex justify-center mb-4 px-4"
         >
           <div className="inline-flex items-center gap-1 bg-gradient-to-r from-taillight-red/20 to-desert-gold/20 rounded-full px-1 py-0.5 ring-1 ring-trim-silver/20">
             <Zap className="h-3 w-3 text-desert-gold" />
-            <span className="text-xs font-semibold text-desert-gold">Crypto Payout Today</span>
+            <span className="text-xs font-semibold text-desert-gold">Digital Payout Today</span>
           </div>
         </motion.div>
 
         {/* Mobile: Main Title at Top */}
         <motion.h1 
           variants={itemVariants}
-          className="lg:hidden font-saira text-responsive-xl font-bold text-pearl leading-tight mb-6 px-2"
+          className="lg:hidden font-saira text-responsive-xl font-bold text-pearl leading-tight mb-4 px-2"
         >
-          <span className="text-desert-gold">We Buy Premium Cars</span> in the UAE — Get Paid in Crypto Today
+          <span className="text-desert-gold">We Buy Premium Cars</span> in the UAE — Get Paid Digitally Today
         </motion.h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8">
           {/* Mobile: Image First, Desktop: Copy First */}
           <div className="lg:col-span-6 lg:order-1 order-2 px-2 lg:px-0">
              {/* Desktop: Digital Payout Badge */}
@@ -122,9 +122,9 @@ export default function HeroDirectLux({
             variants={itemVariants}
             className="flex flex-wrap gap-2 mb-6 lg:mb-8 justify-center lg:justify-start"
           >
-            {cryptoCoins.map((coin, index) => (
+            {paymentMethods.map((method, index) => (
               <motion.div
-                key={coin}
+                key={method}
                 variants={{
                   hidden: { opacity: 0, scale: 0.8, y: 10 },
                   visible: {
@@ -143,7 +143,7 @@ export default function HeroDirectLux({
                   variant="outline"
                   className={`border-trim-silver text-pearl transition-all duration-200 ${!shouldReduceMotion ? 'hover:ring-1 hover:ring-desert-gold hover:shadow-[0_0_20px_rgba(215,179,106,0.25)]' : 'hover:ring-1 hover:ring-desert-gold'}`}
                 >
-                  {coin}
+                  {method}
                 </Badge>
               </motion.div>
             ))}

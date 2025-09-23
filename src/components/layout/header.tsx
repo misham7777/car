@@ -18,7 +18,7 @@ export function Header() {
               <Car className="h-5 w-5 text-white" />
             </div>
             <span className="font-saira text-xl font-bold text-pearl">
-              CryptoCar
+              CarVault
             </span>
             <span className="text-sm text-slate-400">UAE</span>
           </div>

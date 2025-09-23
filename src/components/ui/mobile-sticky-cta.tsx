@@ -6,8 +6,8 @@ import Link from "next/link";
 
 export function MobileStickyCTA() {
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-carbon/95 backdrop-blur border-t border-trim-silver/20 p-3">
-      <div className="flex items-center justify-between gap-2 max-w-none">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-carbon/95 backdrop-blur border-t border-trim-silver/20 p-2">
+      <div className="flex items-center justify-between gap-3 max-w-none">
         <div className="flex-1">
           <p className="text-sm font-medium text-pearl">Get up to 20% more</p>
           <p className="text-xs text-slate-400">with digital payout</p>
